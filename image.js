@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, ActivityIndicator, NetInfo, Platform } from 'react-native';
 import RNFS, { DocumentDirectoryPath } from 'react-native-fs';
-import ResponsiveImage from 'react-native-responsive-image';
 
 const SHA1 = require("crypto-js/sha1");
 const URL = require('url-parse');
@@ -296,18 +295,18 @@ class CacheableImage extends React.Component {
     renderCache() {
         const { children, defaultSource, checkNetwork, networkAvailable, downloadInBackground, activityIndicatorProps, ...props } = this.props;
         return (
-            <ResponsiveImage {...props} source={{uri: 'file://'+this.state.cachedImagePath}} ref={component => this._imageComponent = component}>
+            <Image {...props} source={{uri: 'file://'+this.state.cachedImagePath}} ref={component => this._imageComponent = component}>
             {children}
-            </ResponsiveImage>
+            </Image>
         );
     }
 
     renderLocal() {
         const { children, defaultSource, checkNetwork, networkAvailable, downloadInBackground, activityIndicatorProps, ...props } = this.props;
         return (
-            <ResponsiveImage {...props} ref={component => this._imageComponent = component}>
+            <Image {...props} ref={component => this._imageComponent = component}>
             {children}
-            </ResponsiveImage>
+            </Image>
         );
     }
 
