@@ -257,7 +257,7 @@ class CacheableImage extends React.Component {
         if (this.props.checkNetwork) {
             NetInfo.isConnected.addEventListener('connectionChange', this._handleConnectivityChange);
             // componentWillUnmount unsets this._handleConnectivityChange in case the component unmounts before this fetch resolves
-            NetInfo.isConnected.fetch().done(this._handleConnectivityChange);
+            NetInfo.isConnected.fetch().then(this._handleConnectivityChange);
         }
 
         this._processSource(this.props.source, true);
