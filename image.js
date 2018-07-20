@@ -8,7 +8,7 @@ const URL = require('url-parse');
 
 export default
 class CacheableImage extends React.Component {
-
+    
     static propTypes = {
         activityIndicatorProps: PropTypes.object,
         defaultSource: Image.propTypes.source,
@@ -16,6 +16,7 @@ class CacheableImage extends React.Component {
             PropTypes.bool,
             PropTypes.array
         ]),
+        activityIndicatorComponent: PropTypes.any,
         checkNetwork: PropTypes.bool,
         networkAvailable: PropTypes.bool,
         downloadInBackground: PropTypes.bool,
@@ -24,6 +25,7 @@ class CacheableImage extends React.Component {
 
     static defaultProps = {
         style: { backgroundColor: 'transparent' },
+        activityIndicatorComponent: ActivityIndicator,
         activityIndicatorProps: {
             style: { backgroundColor: 'transparent', flex: 1 }
         },
@@ -287,6 +289,11 @@ class CacheableImage extends React.Component {
         
         const { children, defaultSource, checkNetwork, networkAvailable, downloadInBackground, activityIndicatorProps, ...props } = this.props;
         const style = [activityIndicatorProps.style, this.props.style];
+        const CustomActivityIndicator=this.props.activityIndicatorComponent;
+        if(CustomActivityIndicator)
+        return (
+            <CustomActivityIndicator {...props} {...activityIndicatorProps} style={style} />
+        );
         return (
             <ActivityIndicator {...props} {...activityIndicatorProps} style={style} />
         );
